@@ -1,0 +1,1491 @@
+{
+  "manifestVersion": "3.2",
+  "proxies": [
+    {
+      "address": "0xE2c9CF2429F2361FB844A2131523d1e93706B356",
+      "txHash": "0x958e7daabc44369bfea4310b37c0b32674fa4e9940baae83fc5e699a944088c1",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x74284E5e3e83c51B0F226017A7aD3df9990c7E63",
+      "txHash": "0xd8f93108a3485aceaf932b4dfdbc0cc2e2279a6ddb67a9c12f3e2053f7be6018",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xeb0b8f08e8f3B00F52876a5CCD00f2EF375745F4",
+      "txHash": "0x68bb490b853d2332ce2727446d8a7340064a28d1422487038cd024a4b3817930",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x86877E431f383C243881a76C1e32e08c2eE20380",
+      "txHash": "0x51a5979de38f77b92fbe940362d98c25458136a62fc5ddb78f46ed7ef6c2c727",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x1E13513856388bDAEf5df04348A3D67082Ca78fc",
+      "txHash": "0xde1c0649d3ebb0324ee52daecd15720d82772bc0dce078c839632f31f2114592",
+      "kind": "transparent"
+    },
+    {
+      "address": "0x9df37A906519e0d1095D4CBC0D3664Ce851a9655",
+      "txHash": "0x8dcda20135690a7cb5f354380bcdc48b69057fc544d6ed8ebcdfdeb289923257",
+      "kind": "transparent"
+    }
+  ],
+  "impls": {
+    "4aa2ab7016f9470bf5ebbddffd0b2fcac483d9b8ab7f8288f492b0c516360925": {
+      "address": "0xB8D7372ee6Ff64fE464376d8FFC519ee4997064C",
+      "txHash": "0x1d14d2eb8646b1425ab1345377656b1c546d3aff697bcaba779d4b039151c29a",
+      "layout": {
+        "solcVersion": "0.8.24",
+        "storage": [
+          {
+            "label": "WBTC",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_address",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:216"
+          },
+          {
+            "label": "DAI",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_address",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:217"
+          },
+          {
+            "label": "USDT",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_address",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:218"
+          },
+          {
+            "label": "USDC",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_address",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:219"
+          },
+          {
+            "label": "sUSDe",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_address",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:220"
+          },
+          {
+            "label": "totalUserCount",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_uint256",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:239"
+          },
+          {
+            "label": "allUsers",
+            "offset": 0,
+            "slot": "6",
+            "type": "t_array(t_address)dyn_storage",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:240"
+          },
+          {
+            "label": "userInfo",
+            "offset": 0,
+            "slot": "7",
+            "type": "t_mapping(t_address,t_struct(UserInfo)1204_storage)",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:243"
+          },
+          {
+            "label": "router",
+            "offset": 0,
+            "slot": "8",
+            "type": "t_address",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:245"
+          },
+          {
+            "label": "dexRouter",
+            "offset": 0,
+            "slot": "9",
+            "type": "t_contract(IUniswapV2Router02)1158",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:246"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_struct(InitializableStorage)65_storage": {
+            "label": "struct Initializable.InitializableStorage",
+            "members": [
+              {
+                "label": "_initialized",
+                "type": "t_uint64",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "_initializing",
+                "type": "t_bool",
+                "offset": 8,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(OwnableStorage)14_storage": {
+            "label": "struct OwnableUpgradeable.OwnableStorage",
+            "members": [
+              {
+                "label": "_owner",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(ReentrancyGuardStorage)140_storage": {
+            "label": "struct ReentrancyGuardUpgradeable.ReentrancyGuardStorage",
+            "members": [
+              {
+                "label": "_status",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          },
+          "t_uint64": {
+            "label": "uint64",
+            "numberOfBytes": "8"
+          },
+          "t_array(t_address)dyn_storage": {
+            "label": "address[]",
+            "numberOfBytes": "32"
+          },
+          "t_contract(IUniswapV2Router02)1158": {
+            "label": "contract IUniswapV2Router02",
+            "numberOfBytes": "20"
+          },
+          "t_mapping(t_address,t_struct(UserInfo)1204_storage)": {
+            "label": "mapping(address => struct TestChainUpgradable.UserInfo)",
+            "numberOfBytes": "32"
+          },
+          "t_struct(UserInfo)1204_storage": {
+            "label": "struct TestChainUpgradable.UserInfo",
+            "members": [
+              {
+                "label": "amount",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "totalPoints",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "lastUpdateTime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "referrer",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "3"
+              },
+              {
+                "label": "refAmount",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "4"
+              }
+            ],
+            "numberOfBytes": "160"
+          }
+        },
+        "namespaces": {
+          "erc7201:openzeppelin.storage.ReentrancyGuard": [
+            {
+              "contract": "ReentrancyGuardUpgradeable",
+              "label": "_status",
+              "type": "t_uint256",
+              "src": "@openzeppelin\\contracts-upgradeable\\utils\\ReentrancyGuardUpgradeable.sol:40",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Ownable": [
+            {
+              "contract": "OwnableUpgradeable",
+              "label": "_owner",
+              "type": "t_address",
+              "src": "@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:24",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Initializable": [
+            {
+              "contract": "Initializable",
+              "label": "_initialized",
+              "type": "t_uint64",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:69",
+              "offset": 0,
+              "slot": "0"
+            },
+            {
+              "contract": "Initializable",
+              "label": "_initializing",
+              "type": "t_bool",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:73",
+              "offset": 8,
+              "slot": "0"
+            }
+          ]
+        }
+      }
+    },
+    "004d7748dd13c202d7003008a13402ffb40b101bf7b3bb62e47ee67022cdfaae": {
+      "address": "0x7E75E882285d1d5Eebd96e03e890b8014cf08ba8",
+      "txHash": "0xf0a0982568bc34dc6bca63ee8d35d43e712b8598a09633b725c58c2ec9975ed3",
+      "layout": {
+        "solcVersion": "0.8.24",
+        "storage": [
+          {
+            "label": "WBTC",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_address",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:216"
+          },
+          {
+            "label": "DAI",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_address",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:217"
+          },
+          {
+            "label": "USDT",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_address",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:218"
+          },
+          {
+            "label": "USDC",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_address",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:219"
+          },
+          {
+            "label": "sUSDe",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_address",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:220"
+          },
+          {
+            "label": "totalUserCount",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_uint256",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:239"
+          },
+          {
+            "label": "allUsers",
+            "offset": 0,
+            "slot": "6",
+            "type": "t_array(t_address)dyn_storage",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:240"
+          },
+          {
+            "label": "userInfo",
+            "offset": 0,
+            "slot": "7",
+            "type": "t_mapping(t_address,t_struct(UserInfo)1204_storage)",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:243"
+          },
+          {
+            "label": "router",
+            "offset": 0,
+            "slot": "8",
+            "type": "t_address",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:245"
+          },
+          {
+            "label": "dexRouter",
+            "offset": 0,
+            "slot": "9",
+            "type": "t_contract(IUniswapV2Router02)1158",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:246"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_struct(InitializableStorage)65_storage": {
+            "label": "struct Initializable.InitializableStorage",
+            "members": [
+              {
+                "label": "_initialized",
+                "type": "t_uint64",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "_initializing",
+                "type": "t_bool",
+                "offset": 8,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(OwnableStorage)14_storage": {
+            "label": "struct OwnableUpgradeable.OwnableStorage",
+            "members": [
+              {
+                "label": "_owner",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(ReentrancyGuardStorage)140_storage": {
+            "label": "struct ReentrancyGuardUpgradeable.ReentrancyGuardStorage",
+            "members": [
+              {
+                "label": "_status",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          },
+          "t_uint64": {
+            "label": "uint64",
+            "numberOfBytes": "8"
+          },
+          "t_array(t_address)dyn_storage": {
+            "label": "address[]",
+            "numberOfBytes": "32"
+          },
+          "t_contract(IUniswapV2Router02)1158": {
+            "label": "contract IUniswapV2Router02",
+            "numberOfBytes": "20"
+          },
+          "t_mapping(t_address,t_struct(UserInfo)1204_storage)": {
+            "label": "mapping(address => struct TestChainUpgradable.UserInfo)",
+            "numberOfBytes": "32"
+          },
+          "t_struct(UserInfo)1204_storage": {
+            "label": "struct TestChainUpgradable.UserInfo",
+            "members": [
+              {
+                "label": "amount",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "totalPoints",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "lastUpdateTime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "referrer",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "3"
+              },
+              {
+                "label": "refAmount",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "4"
+              }
+            ],
+            "numberOfBytes": "160"
+          }
+        },
+        "namespaces": {
+          "erc7201:openzeppelin.storage.ReentrancyGuard": [
+            {
+              "contract": "ReentrancyGuardUpgradeable",
+              "label": "_status",
+              "type": "t_uint256",
+              "src": "@openzeppelin\\contracts-upgradeable\\utils\\ReentrancyGuardUpgradeable.sol:40",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Ownable": [
+            {
+              "contract": "OwnableUpgradeable",
+              "label": "_owner",
+              "type": "t_address",
+              "src": "@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:24",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Initializable": [
+            {
+              "contract": "Initializable",
+              "label": "_initialized",
+              "type": "t_uint64",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:69",
+              "offset": 0,
+              "slot": "0"
+            },
+            {
+              "contract": "Initializable",
+              "label": "_initializing",
+              "type": "t_bool",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:73",
+              "offset": 8,
+              "slot": "0"
+            }
+          ]
+        }
+      }
+    },
+    "9c1aa75997f196fd41d7ee643cb67bb3e12dc40fedf7f668dccd88a9a94bcb9a": {
+      "address": "0x0565ca1F4BD2B09a1dfB76E5d8d2F31922B776f0",
+      "txHash": "0x37c82ddb3b0debf2343875c06d60b24cc7878f76e3959a720e0a305b1b41228f",
+      "layout": {
+        "solcVersion": "0.8.24",
+        "storage": [
+          {
+            "label": "WBTC",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_address",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:216"
+          },
+          {
+            "label": "DAI",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_address",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:217"
+          },
+          {
+            "label": "USDT",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_address",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:218"
+          },
+          {
+            "label": "USDC",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_address",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:219"
+          },
+          {
+            "label": "sUSDe",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_address",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:220"
+          },
+          {
+            "label": "totalUserCount",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_uint256",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:239"
+          },
+          {
+            "label": "allUsers",
+            "offset": 0,
+            "slot": "6",
+            "type": "t_array(t_address)dyn_storage",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:240"
+          },
+          {
+            "label": "userInfo",
+            "offset": 0,
+            "slot": "7",
+            "type": "t_mapping(t_address,t_struct(UserInfo)1204_storage)",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:243"
+          },
+          {
+            "label": "router",
+            "offset": 0,
+            "slot": "8",
+            "type": "t_address",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:245"
+          },
+          {
+            "label": "dexRouter",
+            "offset": 0,
+            "slot": "9",
+            "type": "t_contract(IUniswapV2Router02)1158",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:246"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_struct(InitializableStorage)65_storage": {
+            "label": "struct Initializable.InitializableStorage",
+            "members": [
+              {
+                "label": "_initialized",
+                "type": "t_uint64",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "_initializing",
+                "type": "t_bool",
+                "offset": 8,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(OwnableStorage)14_storage": {
+            "label": "struct OwnableUpgradeable.OwnableStorage",
+            "members": [
+              {
+                "label": "_owner",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(ReentrancyGuardStorage)140_storage": {
+            "label": "struct ReentrancyGuardUpgradeable.ReentrancyGuardStorage",
+            "members": [
+              {
+                "label": "_status",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          },
+          "t_uint64": {
+            "label": "uint64",
+            "numberOfBytes": "8"
+          },
+          "t_array(t_address)dyn_storage": {
+            "label": "address[]",
+            "numberOfBytes": "32"
+          },
+          "t_contract(IUniswapV2Router02)1158": {
+            "label": "contract IUniswapV2Router02",
+            "numberOfBytes": "20"
+          },
+          "t_mapping(t_address,t_struct(UserInfo)1204_storage)": {
+            "label": "mapping(address => struct TestChainUpgradable.UserInfo)",
+            "numberOfBytes": "32"
+          },
+          "t_struct(UserInfo)1204_storage": {
+            "label": "struct TestChainUpgradable.UserInfo",
+            "members": [
+              {
+                "label": "amount",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "totalPoints",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "lastUpdateTime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "referrer",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "3"
+              },
+              {
+                "label": "refAmount",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "4"
+              }
+            ],
+            "numberOfBytes": "160"
+          }
+        },
+        "namespaces": {
+          "erc7201:openzeppelin.storage.ReentrancyGuard": [
+            {
+              "contract": "ReentrancyGuardUpgradeable",
+              "label": "_status",
+              "type": "t_uint256",
+              "src": "@openzeppelin\\contracts-upgradeable\\utils\\ReentrancyGuardUpgradeable.sol:40",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Ownable": [
+            {
+              "contract": "OwnableUpgradeable",
+              "label": "_owner",
+              "type": "t_address",
+              "src": "@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:24",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Initializable": [
+            {
+              "contract": "Initializable",
+              "label": "_initialized",
+              "type": "t_uint64",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:69",
+              "offset": 0,
+              "slot": "0"
+            },
+            {
+              "contract": "Initializable",
+              "label": "_initializing",
+              "type": "t_bool",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:73",
+              "offset": 8,
+              "slot": "0"
+            }
+          ]
+        }
+      }
+    },
+    "7efceea64fc927bfb8a4133416715227a057943382973c55d47c0fb4697650f7": {
+      "address": "0xb226f68f0b9813375720d0fBF4517a4156a30e0E",
+      "txHash": "0x44463842e26002b09fc14aa3594075995a85e3ec7ee4826a0fa7649b58872312",
+      "layout": {
+        "solcVersion": "0.8.24",
+        "storage": [
+          {
+            "label": "WBTC",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_address",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:216"
+          },
+          {
+            "label": "DAI",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_address",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:217"
+          },
+          {
+            "label": "USDT",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_address",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:218"
+          },
+          {
+            "label": "USDC",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_address",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:219"
+          },
+          {
+            "label": "sUSDe",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_address",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:220"
+          },
+          {
+            "label": "totalUserCount",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_uint256",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:239"
+          },
+          {
+            "label": "allUsers",
+            "offset": 0,
+            "slot": "6",
+            "type": "t_array(t_address)dyn_storage",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:240"
+          },
+          {
+            "label": "userInfo",
+            "offset": 0,
+            "slot": "7",
+            "type": "t_mapping(t_address,t_struct(UserInfo)1204_storage)",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:243"
+          },
+          {
+            "label": "router",
+            "offset": 0,
+            "slot": "8",
+            "type": "t_address",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:245"
+          },
+          {
+            "label": "dexRouter",
+            "offset": 0,
+            "slot": "9",
+            "type": "t_contract(IUniswapV2Router02)1158",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:246"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_struct(InitializableStorage)65_storage": {
+            "label": "struct Initializable.InitializableStorage",
+            "members": [
+              {
+                "label": "_initialized",
+                "type": "t_uint64",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "_initializing",
+                "type": "t_bool",
+                "offset": 8,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(OwnableStorage)14_storage": {
+            "label": "struct OwnableUpgradeable.OwnableStorage",
+            "members": [
+              {
+                "label": "_owner",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(ReentrancyGuardStorage)140_storage": {
+            "label": "struct ReentrancyGuardUpgradeable.ReentrancyGuardStorage",
+            "members": [
+              {
+                "label": "_status",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          },
+          "t_uint64": {
+            "label": "uint64",
+            "numberOfBytes": "8"
+          },
+          "t_array(t_address)dyn_storage": {
+            "label": "address[]",
+            "numberOfBytes": "32"
+          },
+          "t_contract(IUniswapV2Router02)1158": {
+            "label": "contract IUniswapV2Router02",
+            "numberOfBytes": "20"
+          },
+          "t_mapping(t_address,t_struct(UserInfo)1204_storage)": {
+            "label": "mapping(address => struct TestChainUpgradable.UserInfo)",
+            "numberOfBytes": "32"
+          },
+          "t_struct(UserInfo)1204_storage": {
+            "label": "struct TestChainUpgradable.UserInfo",
+            "members": [
+              {
+                "label": "amount",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "totalPoints",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "lastUpdateTime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "referrer",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "3"
+              },
+              {
+                "label": "refAmount",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "4"
+              }
+            ],
+            "numberOfBytes": "160"
+          }
+        },
+        "namespaces": {
+          "erc7201:openzeppelin.storage.ReentrancyGuard": [
+            {
+              "contract": "ReentrancyGuardUpgradeable",
+              "label": "_status",
+              "type": "t_uint256",
+              "src": "@openzeppelin\\contracts-upgradeable\\utils\\ReentrancyGuardUpgradeable.sol:40",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Ownable": [
+            {
+              "contract": "OwnableUpgradeable",
+              "label": "_owner",
+              "type": "t_address",
+              "src": "@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:24",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Initializable": [
+            {
+              "contract": "Initializable",
+              "label": "_initialized",
+              "type": "t_uint64",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:69",
+              "offset": 0,
+              "slot": "0"
+            },
+            {
+              "contract": "Initializable",
+              "label": "_initializing",
+              "type": "t_bool",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:73",
+              "offset": 8,
+              "slot": "0"
+            }
+          ]
+        }
+      }
+    },
+    "10d8245782929acea118141771283ae2991b03e939544c18cfe70001d82d60b7": {
+      "address": "0x47d495C1B1187D6D80E1034C76DAdcaca30b3C14",
+      "txHash": "0x6971c0d80450baf77528e0336cb2761bd188c4d4bd5c072723f4aa7671daf6a4",
+      "layout": {
+        "solcVersion": "0.8.24",
+        "storage": [
+          {
+            "label": "slippage",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_uint256",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:73"
+          },
+          {
+            "label": "dexRouter",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_contract(IUniswapV2Router01)723",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:76"
+          },
+          {
+            "label": "activeContract",
+            "offset": 20,
+            "slot": "1",
+            "type": "t_bool",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:78"
+          },
+          {
+            "label": "activeWithdraw",
+            "offset": 21,
+            "slot": "1",
+            "type": "t_bool",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:79"
+          },
+          {
+            "label": "allUsers",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_array(t_address)dyn_storage",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:92"
+          },
+          {
+            "label": "totalUserCount",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_uint256",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:94"
+          },
+          {
+            "label": "totalStakedDAIAmount",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_uint256",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:95"
+          },
+          {
+            "label": "totalTokenAmounts",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_mapping(t_address,t_uint256)",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:97"
+          },
+          {
+            "label": "userInfo",
+            "offset": 0,
+            "slot": "6",
+            "type": "t_mapping(t_address,t_struct(UserInfo)967_storage)",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:100"
+          },
+          {
+            "label": "requestId",
+            "offset": 0,
+            "slot": "7",
+            "type": "t_uint256",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:363"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_struct(InitializableStorage)65_storage": {
+            "label": "struct Initializable.InitializableStorage",
+            "members": [
+              {
+                "label": "_initialized",
+                "type": "t_uint64",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "_initializing",
+                "type": "t_bool",
+                "offset": 8,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(OwnableStorage)14_storage": {
+            "label": "struct OwnableUpgradeable.OwnableStorage",
+            "members": [
+              {
+                "label": "_owner",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(ReentrancyGuardStorage)140_storage": {
+            "label": "struct ReentrancyGuardUpgradeable.ReentrancyGuardStorage",
+            "members": [
+              {
+                "label": "_status",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          },
+          "t_uint64": {
+            "label": "uint64",
+            "numberOfBytes": "8"
+          },
+          "t_array(t_address)dyn_storage": {
+            "label": "address[]",
+            "numberOfBytes": "32"
+          },
+          "t_contract(IUniswapV2Router01)723": {
+            "label": "contract IUniswapV2Router01",
+            "numberOfBytes": "20"
+          },
+          "t_mapping(t_address,t_struct(UserInfo)967_storage)": {
+            "label": "mapping(address => struct TestChainUpgradable.UserInfo)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_address,t_uint256)": {
+            "label": "mapping(address => uint256)",
+            "numberOfBytes": "32"
+          },
+          "t_struct(UserInfo)967_storage": {
+            "label": "struct TestChainUpgradable.UserInfo",
+            "members": [
+              {
+                "label": "amount",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "totalPoints",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "lastUpdateTime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "referrer",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "3"
+              },
+              {
+                "label": "refAmount",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "4"
+              },
+              {
+                "label": "amountETH",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "5"
+              },
+              {
+                "label": "amountTokens",
+                "type": "t_mapping(t_address,t_uint256)",
+                "offset": 0,
+                "slot": "6"
+              }
+            ],
+            "numberOfBytes": "224"
+          }
+        },
+        "namespaces": {
+          "erc7201:openzeppelin.storage.ReentrancyGuard": [
+            {
+              "contract": "ReentrancyGuardUpgradeable",
+              "label": "_status",
+              "type": "t_uint256",
+              "src": "@openzeppelin\\contracts-upgradeable\\utils\\ReentrancyGuardUpgradeable.sol:40",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Ownable": [
+            {
+              "contract": "OwnableUpgradeable",
+              "label": "_owner",
+              "type": "t_address",
+              "src": "@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:24",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Initializable": [
+            {
+              "contract": "Initializable",
+              "label": "_initialized",
+              "type": "t_uint64",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:69",
+              "offset": 0,
+              "slot": "0"
+            },
+            {
+              "contract": "Initializable",
+              "label": "_initializing",
+              "type": "t_bool",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:73",
+              "offset": 8,
+              "slot": "0"
+            }
+          ]
+        }
+      }
+    },
+    "11342cd8f54731dfb8e83262242de15d3385fa7735189ce26591d57366ab3f35": {
+      "address": "0xC3Ec4839200009ed9550cb8b52C3196bc84cf1d3",
+      "txHash": "0x6269c5d70af8f94a7dab7ae4dca8425bfc46267d9ec67aad7d67c4c66e58830a",
+      "layout": {
+        "solcVersion": "0.8.24",
+        "storage": [
+          {
+            "label": "slippage",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_uint256",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:74"
+          },
+          {
+            "label": "dexRouter",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_contract(IUniswapV2Router01)2977",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:77"
+          },
+          {
+            "label": "activeContract",
+            "offset": 20,
+            "slot": "1",
+            "type": "t_bool",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:79"
+          },
+          {
+            "label": "activeWithdraw",
+            "offset": 21,
+            "slot": "1",
+            "type": "t_bool",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:80"
+          },
+          {
+            "label": "allUsers",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_array(t_address)dyn_storage",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:93"
+          },
+          {
+            "label": "totalUserCount",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_uint256",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:95"
+          },
+          {
+            "label": "totalStakedDAIAmount",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_uint256",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:96"
+          },
+          {
+            "label": "totalTokenAmounts",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_mapping(t_address,t_uint256)",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:98"
+          },
+          {
+            "label": "userInfo",
+            "offset": 0,
+            "slot": "6",
+            "type": "t_mapping(t_address,t_struct(UserInfo)3223_storage)",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:101"
+          },
+          {
+            "label": "requestId",
+            "offset": 0,
+            "slot": "7",
+            "type": "t_uint256",
+            "contract": "TestChainUpgradable",
+            "src": "contracts\\TesetChain_Upgradable.sol:364"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_struct(InitializableStorage)65_storage": {
+            "label": "struct Initializable.InitializableStorage",
+            "members": [
+              {
+                "label": "_initialized",
+                "type": "t_uint64",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "_initializing",
+                "type": "t_bool",
+                "offset": 8,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(OwnableStorage)14_storage": {
+            "label": "struct OwnableUpgradeable.OwnableStorage",
+            "members": [
+              {
+                "label": "_owner",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(ReentrancyGuardStorage)140_storage": {
+            "label": "struct ReentrancyGuardUpgradeable.ReentrancyGuardStorage",
+            "members": [
+              {
+                "label": "_status",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          },
+          "t_uint64": {
+            "label": "uint64",
+            "numberOfBytes": "8"
+          },
+          "t_array(t_address)dyn_storage": {
+            "label": "address[]",
+            "numberOfBytes": "32"
+          },
+          "t_contract(IUniswapV2Router01)2977": {
+            "label": "contract IUniswapV2Router01",
+            "numberOfBytes": "20"
+          },
+          "t_mapping(t_address,t_struct(UserInfo)3223_storage)": {
+            "label": "mapping(address => struct TestChainUpgradable.UserInfo)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_address,t_uint256)": {
+            "label": "mapping(address => uint256)",
+            "numberOfBytes": "32"
+          },
+          "t_struct(UserInfo)3223_storage": {
+            "label": "struct TestChainUpgradable.UserInfo",
+            "members": [
+              {
+                "label": "amount",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "totalPoints",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "lastUpdateTime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "referrer",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "3"
+              },
+              {
+                "label": "refAmount",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "4"
+              },
+              {
+                "label": "amountETH",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "5"
+              },
+              {
+                "label": "amountTokens",
+                "type": "t_mapping(t_address,t_uint256)",
+                "offset": 0,
+                "slot": "6"
+              }
+            ],
+            "numberOfBytes": "224"
+          }
+        },
+        "namespaces": {
+          "erc7201:openzeppelin.storage.ReentrancyGuard": [
+            {
+              "contract": "ReentrancyGuardUpgradeable",
+              "label": "_status",
+              "type": "t_uint256",
+              "src": "@openzeppelin\\contracts-upgradeable\\utils\\ReentrancyGuardUpgradeable.sol:40",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Ownable": [
+            {
+              "contract": "OwnableUpgradeable",
+              "label": "_owner",
+              "type": "t_address",
+              "src": "@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:24",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Initializable": [
+            {
+              "contract": "Initializable",
+              "label": "_initialized",
+              "type": "t_uint64",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:69",
+              "offset": 0,
+              "slot": "0"
+            },
+            {
+              "contract": "Initializable",
+              "label": "_initializing",
+              "type": "t_bool",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:73",
+              "offset": 8,
+              "slot": "0"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
