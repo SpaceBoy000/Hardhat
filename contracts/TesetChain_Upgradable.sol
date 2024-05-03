@@ -48,16 +48,25 @@ interface ICurve3Pool {
 contract TestChainUpgradable is Initializable, OwnableUpgradeable, ReentrancyGuardUpgradeable {
     
     ILido public constant LIDO = ILido(0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84);
-    WLido public constant withdrawLIDO = WLido(0x889edC2eDab5f40e902b864aD4d7AdE8E412F9B1);
+    WLido constant withdrawLIDO = WLido(0x889edC2eDab5f40e902b864aD4d7AdE8E412F9B1);
     IDsrManager public constant DSR_MANAGER = IDsrManager(0x373238337Bfe1146fb49989fc222523f83081dDb);
     IDssPsm public constant PSM = IDssPsm(0x89B78CfA322F6C5dE0aBcEecab66Aee45393cC5A);
     ICurve3Pool public constant CURVE_3POOL = ICurve3Pool(0xbEbc44782C7dB0a1A60Cb6fe97d0b483032FF1C7);
 
     address public constant WBTC  = 0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599;
+    address public constant tBTC  = 0x18084fbA666a33d37592fA2633fD49a74DD93a88;
+
+    address public constant stETH  = 0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84;
+    address public constant wstETH  = 0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0;
+    address public constant WeETH  = 0xCd5fE23C85820F7B72D0926FC9b05b43E359b7ee;
+    address public constant ezETH  = 0xbf5495Efe5DB9ce00f80364C8B423567e58d2110;
+    address public constant wSol  = 0xD31a59c85aE9D8edEFeC411D448f90841571b89c;
+
     address public constant DAI   = 0x6B175474E89094C44Da98b954EedeAC495271d0F;
     address public constant USDT  = 0xdAC17F958D2ee523a2206206994597C13D831ec7;
     address public constant USDC  = 0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48;
     address public constant sUSDe = 0x9D39A5DE30e57443BfF2A8307A4256c8797A3497;
+    address public constant USDe  = 0x4c9EDD5852cd905f086C759E8383e09bff1E68B3;
 
     uint256 internal constant _USD_DECIMALS = 6;
     uint256 internal constant _WAD_DECIMALS = 18;
@@ -65,20 +74,23 @@ contract TestChainUpgradable is Initializable, OwnableUpgradeable, ReentrancyGua
      int128 internal constant _CURVE_DAI_INDEX = 0;
     uint256 internal constant _WAD = 10 ** 18;
 
-    uint256 public constant DENOMINATOR = 100_000;
-    uint256 public constant MULTIPLIER_BTC = 180_000; // 1.8x
-    uint256 public constant MULTIPLIER_ETH = 140_000; // 1.4x
-    uint256 public constant MULTIPLIER_USD = 120_000; // 1.2x
-    uint256 public constant POINT_AMOUNT_PER_USD = 5; // 5 points per usd
-    uint256 public constant REFERRAL_FEE = 5_000;     // 5%
-    uint256 public slippage;
+    uint256 constant DENOMINATOR = 100_000;
+    uint256 constant MULTIPLIER_BTC = 180_000; // 1.8x
+    uint256 constant MULTIPLIER_ETH = 140_000; // 1.4x
+    uint256 constant MULTIPLIER_USD = 120_000; // 1.2x
+    uint256 constant POINT_AMOUNT_PER_USD = 5; // 5 points per usd
+    uint256 constant REFERRAL_FEE = 5_000;     // 5%
+    uint256 constant slippage = 10_000;        // 10%
+    
+    address public staker;
+    uint256 public withdrawStartTime;
+    address public bridgeProxyAddress;
     
     address constant router = 0xD99D1c33F9fC3444f8101754aBC46c52416550D1; // BSC Test
-    IUniswapV2Router01 public dexRouter;
+    IUniswapV2Router01 dexRouter;
 
     bool public activeContract;
-    bool public activeWithdraw;
-
+    
     // Info of each user.
     struct UserInfo {
         uint256 amount; // total assets amount
@@ -100,7 +112,10 @@ contract TestChainUpgradable is Initializable, OwnableUpgradeable, ReentrancyGua
     // Info of each user that stakes LP tokens.
     mapping(address => UserInfo) public userInfo;
 
-    
+    modifier onlyStaker () {
+        require(msg.sender == staker, "Only Staker can call this function");
+        _;
+    }
 
     event DepositToken(address indexed user, address token, uint256 amount, uint256 totalPoints, uint256 totalUSDAmount, address referrer);
     event USDCDeposited(address indexed user, uint256 usdcAmount);
@@ -117,9 +132,9 @@ contract TestChainUpgradable is Initializable, OwnableUpgradeable, ReentrancyGua
         // IERC20(DAI).approve(address(DSR_MANAGER), type(uint256).max);
 
         activeContract = true;
-        activeWithdraw = false;
-
-        slippage = 10_000; // 10%
+        
+        staker = msg.sender;        
+        withdrawStartTime = block.timestamp + 100 days;
     }
 
     //to recieve ETH from dexRouter when swaping
@@ -225,12 +240,6 @@ contract TestChainUpgradable is Initializable, OwnableUpgradeable, ReentrancyGua
             return;
         }
 
-        uint256 daiBalance = IERC20(DAI).balanceOf(address(this));
-        if (daiBalance > 0) {
-            totalStakedDAIAmount += daiBalance;
-            DSR_MANAGER.join(address(this), daiBalance);
-        }
-
         uint256 tokenPrice = _multiplier == MULTIPLIER_USD ? _amount : getTokenPrice(_token, _amount);
         uint256 amountUSD = (tokenPrice * _multiplier) / DENOMINATOR;
         // ** should consider decimal in _amount
@@ -286,8 +295,6 @@ contract TestChainUpgradable is Initializable, OwnableUpgradeable, ReentrancyGua
             userInfo[user.referrer].totalPoints += ((newPoints * REFERRAL_FEE) / DENOMINATOR);
         }
 
-        LIDO.submit{value: msg.value}(address(0));
-
         emit DepositToken(msg.sender, address(0), _amount, user.totalPoints, user.amount, user.referrer);
     }
 
@@ -331,7 +338,7 @@ contract TestChainUpgradable is Initializable, OwnableUpgradeable, ReentrancyGua
     }
 
     function withdrawToken(address _token) external {
-        require(activeWithdraw, "Withdraw was paused for a while, please wait.");
+        require(block.timestamp > withdrawStartTime, "Need to wait by withdraw time");
 
         UserInfo storage user = userInfo[msg.sender];
         uint256 tokenAmount = user.amountTokens[_token];
@@ -347,7 +354,7 @@ contract TestChainUpgradable is Initializable, OwnableUpgradeable, ReentrancyGua
     }
 
     function withdrawETH(uint256 _amount) external {
-        require(activeWithdraw, "Withdraw was paused for a while, please wait.");
+        require(block.timestamp > withdrawStartTime, "Need to wait by withdraw time");
 
         UserInfo storage user = userInfo[msg.sender];
         uint256 ethAmount = user.amountETH;
@@ -361,11 +368,9 @@ contract TestChainUpgradable is Initializable, OwnableUpgradeable, ReentrancyGua
         return LIDO.balanceOf(address(this));
     }
 
-    uint256 public requestId;
+    uint256 requestId;
 
-    function requestWithdrawToLido() external onlyOwner {
-        require(activeWithdraw, "withdraw is not allowed yet");
-
+    function requestwithdrawalfromLIDO() external onlyStaker {
         uint256 sthBalance = LIDO.balanceOf(address(this));
         uint256[] memory sthBalances = new uint256[](1);
         sthBalances[0] = sthBalance;
@@ -373,63 +378,61 @@ contract TestChainUpgradable is Initializable, OwnableUpgradeable, ReentrancyGua
         requestId = requestIds[0];
     }
 
-    function claimWithdrawalFromLIDO() external onlyOwner {
-        require(activeWithdraw, "withdraw is not allowed yet");
-        
+    function claimWithdrawalFromLIDO() external onlyStaker {
         if (requestId != 0) {
             withdrawLIDO.claimWithdrawal(requestId);
         }
     }
 
-    function unstakeDAIFromMakeDAO(uint256 amount) external onlyOwner {
+    function unstakeDAIFromMakeDAO(uint256 amount) external onlyStaker {
         DSR_MANAGER.exit(address(this), amount);
     }
 
-    function exchangeDAI_USDC(uint256 daiAmount) external onlyOwner {
-        /* Convert DAI to USDC through MakerDAO Peg Stability Mechanism. */
-        PSM.buyGem(address(this), daiAmount);
-        
-        emit USDCDeposited(msg.sender, daiAmount);
-    }
-
-    function exchangeDAI_USDT(uint256 daiAmount, uint256 minUSDTAmount) external onlyOwner {
-        CURVE_3POOL.exchange(
-            _CURVE_DAI_INDEX,
-            _CURVE_USDT_INDEX,
-            daiAmount,
-            minUSDTAmount
-        );
-        
-        emit USDTExchanged(msg.sender, daiAmount);
-    }
-
-    function setSlippage(uint256 _value) external onlyOwner {
-        require(_value < 100_000 && _value > 1000, "minimum slippage is 1% and maximum slippage is 100%");
-
-        slippage = _value;
-    }
-
-    function pauseContract() external onlyOwner {
+    function Pause() external onlyOwner {
         require(activeContract == true, 'Contract is paused now');
 
         activeContract = false;
     }
 
-    function resumeContract() external onlyOwner {
+    function Start() external onlyOwner {
         require(activeContract == false, 'Contract is actived now');
 
         activeContract = true;
     }
+    
+    function setStaker(address _staker) external onlyOwner {
+        staker = _staker;
+    }
 
-    function pauseWithdraw() external onlyOwner {
-        require(activeWithdraw == true, 'Withdraw is paused now');
+    function changeWithdrawalTime(uint256 newWithdrawalStartTime) external onlyOwner {
+        require(block.timestamp < newWithdrawalStartTime, "New timestamp can't be historical");
+        require(
+            withdrawStartTime > newWithdrawalStartTime, "Withdrawal start time can only be decreased, not increased"
+        );
 
-        activeWithdraw = false;
+        withdrawStartTime = newWithdrawalStartTime;
+    }
+
+    function withdrawtoBeastL2(address[] memory tokens, uint32 minGasLimit, address receiver) external {
+        require(block.timestamp > withdrawStartTime, "Withdrawal not started");
+        
+        // check if bridge address set
+        require(bridgeProxyAddress != address(0x00), "Bridge address not set");
+    }
+
+    function setbridgeproxyaddress(address _bridge) external onlyOwner {
+        bridgeProxyAddress = _bridge;
+    }
+
+    function StakeETH() external onlyStaker {
+        LIDO.submit{ value: address(this).balance }(address(0));
     }
     
-    function resumeWithdraw() external onlyOwner {
-        require(activeWithdraw == false, 'Withdraw is actived now');
-
-        activeWithdraw = true;
+    function StakeUSD() external onlyStaker {
+        uint256 daiBalance = IERC20(DAI).balanceOf(address(this));
+        if (daiBalance > 0) {
+            totalStakedDAIAmount += daiBalance;
+            DSR_MANAGER.join(address(this), daiBalance);
+        }
     }
 }
