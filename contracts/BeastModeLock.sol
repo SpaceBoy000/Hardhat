@@ -12,67 +12,22 @@ interface IUniswapV2Router01 {
     function getAmountsOut(uint amountIn, address[] calldata path) external view returns (uint[] memory amounts);
 }
 
-interface ILido is IERC20 {
-    function submit(address user) external payable;
-}
-
-interface WLido is IERC20 {
-    function claimWithdrawals(uint256[] calldata _requestIds, uint256[] calldata _hints) external;
-    function getClaimableEther(uint256[] calldata _requestIds, uint256[] calldata _hints) external;
-    function claimWithdrawal(uint256 _requestId) external;
-    function requestWithdrawals(uint256[] calldata _amounts, address _owner) external returns (uint256[] memory requestIds);
-}
-
-interface IDsrManager {
-    function join(address dst, uint256 wad) external;
-    function exit(address dst, uint256 wad) external;
-    function exitAll(address dst) external;
-    function daiBalance(address usr) external returns (uint256 wad);
-    function pot() external view returns (address);
-    function pieOf(address) external view returns (uint256);
-}
-
-interface IDssPsm {
-    function sellGem(address usr, uint256 gemAmt) external;
-    function buyGem(address usr, uint256 gemAmt) external;
-    function dai() external view returns (address);
-    function gemJoin() external view returns (address);
-    function tin() external view returns (uint256);
-    function tout() external view returns (uint256);
-}
-
-interface ICurve3Pool {
-    function exchange(int128 i, int128 j, uint256 dx, uint256 min_dy) external;
-}
-
-contract TestChainUpgradable is Initializable, OwnableUpgradeable, ReentrancyGuardUpgradeable {
+contract BeastModeLock is Initializable, OwnableUpgradeable, ReentrancyGuardUpgradeable {
     
-    ILido public constant LIDO = ILido(0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84);
-    WLido constant withdrawLIDO = WLido(0x889edC2eDab5f40e902b864aD4d7AdE8E412F9B1);
-    IDsrManager public constant DSR_MANAGER = IDsrManager(0x373238337Bfe1146fb49989fc222523f83081dDb);
-    IDssPsm public constant PSM = IDssPsm(0x89B78CfA322F6C5dE0aBcEecab66Aee45393cC5A);
-    ICurve3Pool public constant CURVE_3POOL = ICurve3Pool(0xbEbc44782C7dB0a1A60Cb6fe97d0b483032FF1C7);
+    address constant WBTC  = 0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599;
+    address constant tBTC  = 0x18084fbA666a33d37592fA2633fD49a74DD93a88;
 
-    address public constant WBTC  = 0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599;
-    address public constant tBTC  = 0x18084fbA666a33d37592fA2633fD49a74DD93a88;
+    address constant stETH  = 0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84;
+    address constant wstETH  = 0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0;
+    address constant WeETH  = 0xCd5fE23C85820F7B72D0926FC9b05b43E359b7ee;
+    address constant ezETH  = 0xbf5495Efe5DB9ce00f80364C8B423567e58d2110;
+    address constant wSol  = 0xD31a59c85aE9D8edEFeC411D448f90841571b89c;
 
-    address public constant stETH  = 0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84;
-    address public constant wstETH  = 0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0;
-    address public constant WeETH  = 0xCd5fE23C85820F7B72D0926FC9b05b43E359b7ee;
-    address public constant ezETH  = 0xbf5495Efe5DB9ce00f80364C8B423567e58d2110;
-    address public constant wSol  = 0xD31a59c85aE9D8edEFeC411D448f90841571b89c;
-
-    address public constant DAI   = 0x6B175474E89094C44Da98b954EedeAC495271d0F;
-    address public constant USDT  = 0xdAC17F958D2ee523a2206206994597C13D831ec7;
-    address public constant USDC  = 0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48;
-    address public constant sUSDe = 0x9D39A5DE30e57443BfF2A8307A4256c8797A3497;
-    address public constant USDe  = 0x4c9EDD5852cd905f086C759E8383e09bff1E68B3;
-
-    uint256 internal constant _USD_DECIMALS = 6;
-    uint256 internal constant _WAD_DECIMALS = 18;
-     int128 internal constant _CURVE_USDT_INDEX = 2;
-     int128 internal constant _CURVE_DAI_INDEX = 0;
-    uint256 internal constant _WAD = 10 ** 18;
+    address constant DAI   = 0x6B175474E89094C44Da98b954EedeAC495271d0F;
+    address constant USDT  = 0xdAC17F958D2ee523a2206206994597C13D831ec7;
+    address constant USDC  = 0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48;
+    address constant sUSDe = 0x9D39A5DE30e57443BfF2A8307A4256c8797A3497;
+    address constant USDe  = 0x4c9EDD5852cd905f086C759E8383e09bff1E68B3;
 
     uint256 constant DENOMINATOR = 100_000;
     uint256 constant MULTIPLIER_BTC = 180_000; // 1.8x
@@ -80,13 +35,11 @@ contract TestChainUpgradable is Initializable, OwnableUpgradeable, ReentrancyGua
     uint256 constant MULTIPLIER_USD = 120_000; // 1.2x
     uint256 constant POINT_AMOUNT_PER_USD = 5; // 5 points per usd
     uint256 constant REFERRAL_FEE = 5_000;     // 5%
-    uint256 constant slippage = 10_000;        // 10%
     
-    address public staker;
     uint256 public withdrawStartTime;
     address public bridgeProxyAddress;
     
-    address constant router = 0xD99D1c33F9fC3444f8101754aBC46c52416550D1; // BSC Test
+    address constant router = 0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D; // Uniswap V2 Router
     IUniswapV2Router01 dexRouter;
 
     bool public activeContract;
@@ -105,21 +58,13 @@ contract TestChainUpgradable is Initializable, OwnableUpgradeable, ReentrancyGua
     address[] public allUsers;
 
     uint256 public totalUserCount;
-    uint256 public totalStakedDAIAmount;
-
+    
     mapping(address => uint256) public totalTokenAmounts;
 
     // Info of each user that stakes LP tokens.
     mapping(address => UserInfo) public userInfo;
 
-    modifier onlyStaker () {
-        require(msg.sender == staker, "Only Staker can call this function");
-        _;
-    }
-
     event DepositToken(address indexed user, address token, uint256 amount, uint256 totalPoints, uint256 totalUSDAmount, address referrer);
-    event USDCDeposited(address indexed user, uint256 usdcAmount);
-    event USDTExchanged(address indexed user, uint256 usdtAmount);
 
     function initialize() public initializer {
         __Ownable_init(msg.sender);
@@ -127,55 +72,13 @@ contract TestChainUpgradable is Initializable, OwnableUpgradeable, ReentrancyGua
         IUniswapV2Router01 _dexRouter = IUniswapV2Router01(router);
         dexRouter = _dexRouter;
 
-        // IERC20(USDC).approve(PSM.gemJoin(), type(uint256).max);
-        // IERC20(USDT).approve(address(CURVE_3POOL), type(uint256).max);
-        // IERC20(DAI).approve(address(DSR_MANAGER), type(uint256).max);
-
         activeContract = true;
-        
-        staker = msg.sender;        
+       
         withdrawStartTime = block.timestamp + 100 days;
     }
 
     //to recieve ETH from dexRouter when swaping
     receive() external payable {}
-
-    /**
-     * @notice Convert from wad (18 decimals) to USD (6 decimals) denomination
-     * @param wad Amount in wad
-     * @return Amount in USD
-     */
-    function _wadToUSD(uint256 wad) internal pure returns (uint256) {
-        return wad / (10 ** (_WAD_DECIMALS - _USD_DECIMALS));
-    }
-
-    /**
-     * @notice Convert from USD (6 decimals) to wad (18 decimals) denomination
-     * @param usd Amount in USD
-     * @return Amount in wad
-     */
-    function _usdToWad(uint256 usd) internal pure returns (uint256) {
-        return usd * (10 ** (_WAD_DECIMALS - _USD_DECIMALS));
-    }
-
-
-    function exchangeUSDC(uint256 usdcAmount) internal {
-        /* Convert USDC to DAI through MakerDAO Peg Stability Mechanism. */
-        PSM.sellGem(address(this), usdcAmount);
-
-        emit USDCDeposited(msg.sender, usdcAmount);
-    }
-
-    function exchangeUSDT(uint256 usdtAmount, uint256 minDAIAmount) internal {
-        CURVE_3POOL.exchange(
-            _CURVE_USDT_INDEX,
-            _CURVE_DAI_INDEX,
-            usdtAmount,
-            minDAIAmount
-        );
-        
-        emit USDTExchanged(msg.sender, usdtAmount);
-    }
 
     function getTokenPrice(address token, uint256 amount) public view returns (uint256) {
         address[] memory path = new address[](3);
@@ -222,19 +125,19 @@ contract TestChainUpgradable is Initializable, OwnableUpgradeable, ReentrancyGua
 
         uint256 _multiplier = DENOMINATOR;
 
-        if (_token == WBTC) {
+        if (_token == WBTC || _token == tBTC) {
             _multiplier = MULTIPLIER_BTC;
-        } else if (_token == dexRouter.WETH()) {
+        } else if (_token == dexRouter.WETH() || _token == stETH || _token == wstETH || _token == WeETH || _token == ezETH || _token == wSol) {
             _multiplier = MULTIPLIER_ETH;
         } else if (_token == DAI) {
             _multiplier = MULTIPLIER_USD;
         } else if (_token == USDC) {
             _multiplier = MULTIPLIER_USD;
-            exchangeUSDC(_amount);
         } else if (_token == USDT) {
             _multiplier = MULTIPLIER_USD;
-            exchangeUSDT(_amount, _amount - _amount * slippage / DENOMINATOR);
         } else if (_token == sUSDe) {
+            _multiplier = MULTIPLIER_USD;
+        } else if (_token == USDe) {
             _multiplier = MULTIPLIER_USD;
         } else {
             return;
@@ -298,7 +201,7 @@ contract TestChainUpgradable is Initializable, OwnableUpgradeable, ReentrancyGua
         emit DepositToken(msg.sender, address(0), _amount, user.totalPoints, user.amount, user.referrer);
     }
 
-    function updateUserPoints(address _user) public {
+    function updateUserPoints(address _user) internal {
         uint256 _pendingPoints = getPendingPoints(_user);
 
         if (_pendingPoints > 0) {
@@ -331,12 +234,6 @@ contract TestChainUpgradable is Initializable, OwnableUpgradeable, ReentrancyGua
         return (_totalPoints, _referrer);
     }
 
-    function giveAway(address _user, uint256 _points) public onlyOwner {
-        require(userInfo[_user].amount > 0, "Only depositer can receive giveaway");
-
-        userInfo[_user].totalPoints += _points;
-    }
-
     function withdrawToken(address _token) external {
         require(block.timestamp > withdrawStartTime, "Need to wait by withdraw time");
 
@@ -364,30 +261,6 @@ contract TestChainUpgradable is Initializable, OwnableUpgradeable, ReentrancyGua
         payable(msg.sender).transfer(_amount);
     }
 
-    function totalstETHBalance() public view returns (uint256) {
-        return LIDO.balanceOf(address(this));
-    }
-
-    uint256 requestId;
-
-    function requestwithdrawalfromLIDO() external onlyStaker {
-        uint256 sthBalance = LIDO.balanceOf(address(this));
-        uint256[] memory sthBalances = new uint256[](1);
-        sthBalances[0] = sthBalance;
-        uint256[] memory requestIds = withdrawLIDO.requestWithdrawals(sthBalances, address(this));
-        requestId = requestIds[0];
-    }
-
-    function claimWithdrawalFromLIDO() external onlyStaker {
-        if (requestId != 0) {
-            withdrawLIDO.claimWithdrawal(requestId);
-        }
-    }
-
-    function unstakeDAIFromMakeDAO(uint256 amount) external onlyStaker {
-        DSR_MANAGER.exit(address(this), amount);
-    }
-
     function Pause() external onlyOwner {
         require(activeContract == true, 'Contract is paused now');
 
@@ -400,10 +273,6 @@ contract TestChainUpgradable is Initializable, OwnableUpgradeable, ReentrancyGua
         activeContract = true;
     }
     
-    function setStaker(address _staker) external onlyOwner {
-        staker = _staker;
-    }
-
     function changeWithdrawalTime(uint256 newWithdrawalStartTime) external onlyOwner {
         require(block.timestamp < newWithdrawalStartTime, "New timestamp can't be historical");
         require(
@@ -413,26 +282,7 @@ contract TestChainUpgradable is Initializable, OwnableUpgradeable, ReentrancyGua
         withdrawStartTime = newWithdrawalStartTime;
     }
 
-    function withdrawtoBeastL2(address[] memory tokens, uint32 minGasLimit, address receiver) external {
-        require(block.timestamp > withdrawStartTime, "Withdrawal not started");
-        
-        // check if bridge address set
-        require(bridgeProxyAddress != address(0x00), "Bridge address not set");
-    }
-
     function setbridgeproxyaddress(address _bridge) external onlyOwner {
         bridgeProxyAddress = _bridge;
-    }
-
-    function StakeETH() external onlyStaker {
-        LIDO.submit{ value: address(this).balance }(address(0));
-    }
-    
-    function StakeUSD() external onlyStaker {
-        uint256 daiBalance = IERC20(DAI).balanceOf(address(this));
-        if (daiBalance > 0) {
-            totalStakedDAIAmount += daiBalance;
-            DSR_MANAGER.join(address(this), daiBalance);
-        }
     }
 }
